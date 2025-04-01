@@ -1,4 +1,11 @@
-import { IsDate, IsEmail, IsEnum, IsString, Matches, MinLength } from 'class-validator';
+import {
+  IsDate,
+  IsEmail,
+  IsEnum,
+  IsString,
+  Matches,
+  MinLength,
+} from 'class-validator';
 import { MaritalStatus } from 'src/schemas/user.schema';
 
 export class SignupDto {
