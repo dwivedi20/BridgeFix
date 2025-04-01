@@ -40,7 +40,7 @@ async login(@Body() logindto:LoginDto){
 @Patch(':id')
 @UseGuards(AuthGuard)
  async Profileupdate(@Param('id')id:string, @Body() updateDto:UpdateDTO){
-    return this.authServices.userupdateProfile(id,updateDto)
+    return this.authServices.updateProfile(id,updateDto)
  }
 @Post("/forgot-password")
 @UseGuards(AuthGuard)

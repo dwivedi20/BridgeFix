@@ -41,7 +41,7 @@ export class User extends Document {
     MotherName: string;
     @Prop({ required: true, enum:MaritalStatus})
      marital_status: string;
-    @Prop({ })
+    @Prop({required:true})
     SpouseName?: string;
     @Prop({ required: true, })
     Permanentaddress: string;
