@@ -149,9 +149,8 @@ export class AuthService {
     const user = await this.UserModel.findByIdAndUpdate(id,updateUserDto,{new : true,
 
     });
-    if(!user){
-      throw new NotFoundException('User Not found')
-      
+    if (!user) {
+      throw new NotFoundException('User missing');
     }
     return user
     
