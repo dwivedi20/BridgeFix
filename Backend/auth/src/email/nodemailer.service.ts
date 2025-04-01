@@ -21,7 +21,7 @@ export class MailService {
       from: process.env.EMAIL,
       to: to,
       subject: 'password reset request',
-      html: `<p>You requested a password reset. Click the link below to reset your password:</p><p><a href="${resetlink}">Reset Password</a></p> `,
+      html: `<p>You requested a password reset. Click the link below to reset your a  password:</p><p><a href="${resetlink}">Reset Password</a></p> `,
     };
     await this.transporter.sendMail(mailoptional);
   }
