@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -10,7 +11,7 @@ import { User } from 'src/schemas/user.schema';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from 'src/dto/login.dto';
-import { JwtService } from '@nestjs/jwt';
+import { JwtSecretRequestType, JwtService } from '@nestjs/jwt';
 import { ViewProfile } from 'src/dto/viewprofile.dto';
 import { UpdateDTO } from 'src/dto/update.dto';
 import { nanoid } from 'nanoid';
@@ -168,7 +169,26 @@ export class AuthService {
     }
      return {message : "If this user exists, they will receive an email"}
   }
-  async userresetpassword(newpassword:string, resetToken:string){
+  async userresetpassword(newpass:string, Token:string){
+     if(!newpass)  {
+          throw new UnauthorizedException(" please fill your newpassword")
+     } 
+     const token =  await this.ResetTokenModel.findOne({
+           resetToken:Token,
+          expireDate:{$gte:new Date()},
+     })
+      if(!token){
+        throw new UnauthorizedException("Invalid Error")
+      }
+     const user = await this.UserModel.findById(token.id)
+      if(!user){
+         throw new InternalServerErrorException()
+      }
+     const newhashpassword =  await bcrypt.hash(newpass,10)
+     user.password = newhashpassword
+     await user.save()
+      
+     
      
   }
 }

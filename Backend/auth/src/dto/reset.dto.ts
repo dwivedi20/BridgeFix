@@ -4,5 +4,5 @@ export class ResetPasswordDTO{
    @IsString() 
    resetToken : string;
    @IsString()
-   newpasword : string;
+   newpass : string;
 }

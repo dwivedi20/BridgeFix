@@ -1,5 +1,7 @@
+import { Transform } from 'class-transformer';
 import { IsDate, IsEmail, IsEnum, IsString, Matches, MinLength } from 'class-validator';
 import { MaritalStatus } from 'src/schemas/user.schema';
+;
 
 export class SignupDto {
   @IsString()
@@ -16,7 +18,8 @@ export class SignupDto {
   @IsString()
   Confirmpassword: string;
   @IsDate()
-  Dateofbirth: Date;
+  @Transform(({value})=>new Date(value))
+  Dateofbirth: Date
   @IsString()
   Phonenumber: string;
   @IsString()
@@ -33,6 +36,7 @@ export class SignupDto {
   @IsString()
   Currentaddress: string;
   @IsDate()
+  @Transform(({value})=>new Date(value))
   JoiningDate: Date;
   @IsString()
   Category: string;

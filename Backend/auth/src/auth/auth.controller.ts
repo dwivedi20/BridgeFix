@@ -29,6 +29,7 @@ import { ResetPasswordDTO } from "src/dto/reset.dto";
 async login(@Body() logindto:LoginDto){
    return await this.authServices.Login(logindto)
 }
+
 // user is Get by Id
 @Get(":id")
 @UseGuards(AuthGuard)
@@ -47,9 +48,10 @@ async ForgotPassword(@Body()forgotDto:ForgotDTO){
     return this.authServices.userforgotpassword(forgotDto.email)
 }
 @Put("/reset-password")
+@UseGuards(AuthGuard)
  async resetpassword(@Body()resetpassworddto:ResetPasswordDTO){
     return this.authServices.userresetpassword(
-      resetpassworddto.newpasword,
+      resetpassworddto.newpass,
       resetpassworddto.resetToken,
     )
  }

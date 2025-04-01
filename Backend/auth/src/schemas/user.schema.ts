@@ -1,5 +1,6 @@
 import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose"
+import { nanoid } from "nanoid";
 
 // enum UserMaritalstatus{
 //      Single,
@@ -30,7 +31,7 @@ export class User extends Document {
     password: string;
     @Prop({ required: true, })
     Confirmpassword: string;
-    @Prop({ required: true })
+    @Prop({ required: true ,type:Date,})
     Dateofbirth: Date;
     @Prop({ required: true, unique:true, })
     Phonenumber: string;
@@ -46,7 +47,7 @@ export class User extends Document {
     Permanentaddress: string;
     @Prop({ required: true, })
     Currentaddress: string;
-    @Prop({ required: true, })
+    @Prop({ required: true, type:Date, })
     JoiningDate: Date;
     @Prop({ required: true })
     Category: string
