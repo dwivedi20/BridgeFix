@@ -19,6 +19,7 @@ export enum MaritalStatus {
     timestamps: true,
 })
 export class User extends Document {
+
     @Prop({ required: true, unique: true, })
     employee_id: string;
     @Prop({ required: true ,})
@@ -47,7 +48,9 @@ export class User extends Document {
     Permanentaddress: string;
     @Prop({ required: true, })
     Currentaddress: string;
-    @Prop({ required: true, type:Date, })
+    @Prop({ required: true, })
+    Totalexprience: string;
+    @Prop({ required: true, })
     JoiningDate: Date;
     @Prop({ required: true })
     Category: string
@@ -57,5 +60,6 @@ export class User extends Document {
     Designation: string;
     @Prop({ required: true, })
     Reporting_to: string;
+
 }
 export const UserSchema = SchemaFactory.createForClass(User)

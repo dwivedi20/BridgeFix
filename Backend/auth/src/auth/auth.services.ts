@@ -46,6 +46,7 @@ export class AuthService {
       Department,
       Designation,
       Reporting_to,
+      Totalexprience
     } = signupData;
     //
     if (
@@ -67,7 +68,8 @@ export class AuthService {
       !Category ||
       !Department ||
       !Designation ||
-      !Reporting_to
+      !Reporting_to||
+      !Totalexprience
     ) {
     }
     // User Already register
@@ -101,6 +103,7 @@ export class AuthService {
       Department,
       Designation,
       Reporting_to,
+      Totalexprience
     });
     return {
       message: 'User registered successfully',
@@ -142,8 +145,6 @@ export class AuthService {
     }
     return useremployee;
   }
-  
-
   async updateProfile(id:string,updateUserDto:UpdateDTO):Promise<any>{
     const user = await this.UserModel.findByIdAndUpdate(id,updateUserDto,{new : true,
 
