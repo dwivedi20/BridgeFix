@@ -39,6 +39,9 @@ export class UpdateDTO {
   @IsDate()
   JoiningDate?: Date;
   @IsOptional()
+  @IsDate()
+  Totalexprience?:string;
+  @IsOptional()
   @IsString()
   Category?: string;
   @IsOptional()
