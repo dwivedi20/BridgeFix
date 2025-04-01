@@ -148,7 +148,7 @@ export class AuthService {
       new: true,
     });
     if (!updateuser) {
-      throw new NotFoundException('User Not Found');
+      throw new NotFoundException('User missing');
     }
     return updateuser;
   }
