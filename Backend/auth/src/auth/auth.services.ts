@@ -46,6 +46,7 @@ export class AuthService {
       Department,
       Designation,
       Reporting_to,
+      Totalexprience
     } = signupData;
     //
     if (
@@ -67,7 +68,8 @@ export class AuthService {
       !Category ||
       !Department ||
       !Designation ||
-      !Reporting_to
+      !Reporting_to||
+      !Totalexprience
     ) {
     }
     // User Already register
@@ -101,6 +103,7 @@ export class AuthService {
       Department,
       Designation,
       Reporting_to,
+      Totalexprience
     });
     return {
       message: 'User registered successfully',
@@ -142,15 +145,20 @@ export class AuthService {
     }
     return useremployee;
   }
-  async userupdateProfile(id: string, updateDto: UpdateDTO): Promise<any> {
-    const updateuser = await this.UserModel.findByIdAndUpdate(id, updateDto, {
-      new: true,
+  async updateProfile(id:string,updateUserDto:UpdateDTO):Promise<any>{
+    const user = await this.UserModel.findByIdAndUpdate(id,updateUserDto,{new : true,
+
     });
-    if (!updateuser) {
-      throw new NotFoundException('User Not Found');
+    if(!user){
+      throw new NotFoundException('User Not found')
+      
     }
-    return updateuser;
+    return user
+    
+    
   }
+
+
   async userforgotpassword(email: string): Promise<any> {
     const forgot = await this.UserModel.findOne({ email: email });
 

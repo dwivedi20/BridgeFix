@@ -36,11 +36,22 @@ async login(@Body() logindto:LoginDto){
     return this.authServices.userProfile(id)
 }
 // user is Update by Id
+// @Patch(':id')
+// @UseGuards(AuthGuard)
+//  async Profileupdate(@Param('id')id:string, @Body() updateDto:UpdateDTO){
+//     return this.authServices.userupdateProfile(id,updateDto)
+//  }
+
 @Patch(':id')
 @UseGuards(AuthGuard)
- async Profileupdate(@Param('id')id:string, @Body() updateDto:UpdateDTO){
-    return this.authServices.userupdateProfile(id,updateDto)
+async updateProfile(
+   @Param('id')id:string,
+   @Body()updateUserDto:UpdateDTO,
+):Promise<any> {
+   // Call the update method from the service
+   return this.authServices.updateProfile(id, updateUserDto);
  }
+
 @Post("/forgot-password")
 @UseGuards(AuthGuard)
 async ForgotPassword(@Body()forgotDto:ForgotDTO){

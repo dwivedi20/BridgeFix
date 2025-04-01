@@ -4,6 +4,9 @@ import { MaritalStatus } from 'src/schemas/user.schema';
 export class UpdateDTO {
   @IsOptional()
   @IsString()
+  Totalexprience?:string;
+  @IsOptional()
+  @IsString()
   FirstName?: string;
   @IsOptional()
   @IsString()
