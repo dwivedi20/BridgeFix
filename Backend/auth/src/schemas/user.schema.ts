@@ -1,25 +1,15 @@
 import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose"
-import { nanoid } from "nanoid";
 
-// enum UserMaritalstatus{
-//      Single,
-//      Married,
-//      Divorced,
-//      Windowed
-// }
-export enum MaritalStatus {
-    SINGLE = 'Single',
-    MARRIED = 'Married',
-    DIVORCED = 'Divorced',
-    WIDOWED = 'Widowed',
-  }
+
+
+
 
 @Schema({
     timestamps: true,
 })
 export class User extends Document {
-    @Prop({ required: true, unique: true, })
+    @Prop({  })
     employee_id: string;
     @Prop({ required: true ,})
     FirstName: string;
@@ -33,29 +23,44 @@ export class User extends Document {
     Confirmpassword: string;
     @Prop({ required: true ,type:Date,})
     Dateofbirth: Date;
-    @Prop({ required: true, unique:true, })
+    @Prop({ })
     Phonenumber: string;
-    @Prop({ required: true })
+    @Prop({  })
     FatherName: string;
-    @Prop({ required: true })
+    @Prop({})
     MotherName: string;
-    @Prop({ required: true, enum:MaritalStatus})
+    @Prop({ })
      marital_status: string;
-    @Prop({required:true})
+    @Prop({ })
+     Bloodgroup: string;
+     @Prop({  })
     SpouseName?: string;
-    @Prop({ required: true, })
+    @Prop({  })
     Permanentaddress: string;
-    @Prop({ required: true, })
+    @Prop({  })
     Currentaddress: string;
-    @Prop({ required: true, type:Date, })
+    @Prop({})
     JoiningDate: Date;
-    @Prop({ required: true })
+    @Prop({  })
     Category: string
-    @Prop({ required: true, })
+    @Prop({  })
     Department: string;
-    @Prop({ required: true, })
+    @Prop({ })
     Designation: string;
-    @Prop({ required: true, })
+    @Prop({  })
     Reporting_to: string;
+    @Prop({  })
+    BankName: string;
+    @Prop({ })
+    BranchName: string;
+    @Prop({})
+    Accountnumber: number;
+    @Prop({ })
+    Accounttype: string;
+    @Prop({})
+    IFSCCODE:  string;
+  @Prop({ required: false, type: Date, default: null })
+   deletedAt?: Date; // Add soft delete field
 }
+
 export const UserSchema = SchemaFactory.createForClass(User)

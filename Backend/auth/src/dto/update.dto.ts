@@ -1,5 +1,4 @@
 import { IsDate, IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
-import { MaritalStatus } from 'src/schemas/user.schema';
 
 export class UpdateDTO {
   @IsOptional()
@@ -8,6 +7,9 @@ export class UpdateDTO {
   @IsOptional()
   @IsString()
   LastName?: string;
+  @IsOptional()
+  @IsString()
+   employee_id: string;
   @IsOptional()
   @IsEmail()
   email?: string;
@@ -24,8 +26,8 @@ export class UpdateDTO {
   @IsString()
   MotherName?: string;
   @IsOptional()
-  @IsEnum(MaritalStatus)
-  marital_status?: MaritalStatus;
+  @IsString()
+  marital_status?: string;
   @IsOptional()
   @IsString()
   SpouseName?: string;
@@ -40,7 +42,7 @@ export class UpdateDTO {
   JoiningDate?: Date;
   @IsOptional()
   @IsDate()
-  Totalexprience?:string;
+  Totalexprience?: string;
   @IsOptional()
   @IsString()
   Category?: string;
@@ -53,4 +55,19 @@ export class UpdateDTO {
   @IsOptional()
   @IsString()
   Reporting_to?: string;
+  @IsOptional()
+  @IsString()
+  BankName?: string;
+  @IsOptional()
+  @IsString()
+  BranchName?: string;
+  @IsOptional()
+  @IsString()
+  Accountnumber?: string;
+  @IsOptional()
+  @IsString()
+  Accounttype?: string;
+  @IsOptional()
+  @IsString()
+  IFSCCODE?: string;
 }

@@ -5,4 +5,6 @@ export class LoginDto {
   email : string;
   @IsString()
   password:string;
+
+
 }
