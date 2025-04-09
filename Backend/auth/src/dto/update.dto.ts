@@ -1,6 +1,7 @@
 import { IsDate, IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
 
 export class UpdateDTO {
+ 
   @IsOptional()
   @IsString()
   FirstName?: string;

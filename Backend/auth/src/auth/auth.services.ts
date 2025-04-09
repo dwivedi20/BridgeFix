@@ -12,16 +12,19 @@ import  { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from 'src/dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
-
 import { UpdateDTO } from 'src/dto/update.dto';
-
-
+import{LeaveBalance, LeaveSchema} from './../schemas/leave.schema';
+import * as path from 'path';
+import * as fs from 'fs';
+import { Leave } from 'src/schemas/listholiday.schema';
+import { LeaveDTO } from 'src/dto/leave.dto';
 
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(User.name) private UserModel: Model<User>,
+    @InjectModel(LeaveBalance.name) private LeaveBalance: Model<LeaveBalance>,
     
     private jwtServices: JwtService,
       
@@ -113,11 +116,62 @@ export class AuthService {
 
   async userProfile(id: string): Promise<User> {
     const useremployee = await this.UserModel.findById(id).exec();
+
     if (!useremployee) {
       throw new NotFoundException();
     }
     return useremployee;
   }
+
+//uploadimage
+  async uploadImage(image:Express.Multer.File):Promise<any>{
+    const uploadDir = path.join(__dirname, '..' , 'uploads');
+    if(!fs.existsSync(uploadDir)){
+      fs.mkdirSync(uploadDir);
+
+      
+      const filePath = path.join(uploadDir, image.originalname);
+      await fs.writeFileSync(filePath, image.buffer); // Use buffer for in-memory files
+      return { filename: image.originalname }
+
+    }
+  }
+
+  //LeaveBalace Post
+
+  async createLeave( leaveDto:LeaveDTO):Promise<any>{
+    const newLeave = new this.LeaveBalance(leaveDto)
+    return newLeave.save()
+   
+   
+  }
+
+//LeaveBalance 
+
+async getLeaveBalance(employee_id:string):Promise<any>{
+  const LeaveBalance:LeaveBalance|null = await this.LeaveBalance.findOne({ employee_id});
+  console.log(LeaveBalance,"---leave balnce")
+  if (!LeaveBalance) {
+    throw new NotFoundException('Employee leave balance not found');
+  }
+
+  return {
+    employee_id: LeaveBalance?.employee_id,
+    LossOfPay: LeaveBalance?.LossOfPay,
+    Comp_off: LeaveBalance?.Comp_off,
+    EmergencyLeave: LeaveBalance?.EmergencyLeave,
+    EarnedLeave: LeaveBalance?.EarnedLeave,
+    PaternityLeave: LeaveBalance?.PaternityLeave,
+    RestrictedLeave: LeaveBalance?.RestrictedLeave,
+    SickLeave: LeaveBalance?.SickLeave,
+    MaternityLeave: LeaveBalance?.MaternityLeave,
+    
+  };
+  
+  
+}
+
+//updateprofile
 
   async updateProfile(id: string, updateUserDto: UpdateDTO): Promise<any> {
     const user = await this.UserModel.findByIdAndUpdate(id, updateUserDto, {
