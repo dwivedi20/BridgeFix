@@ -5,6 +5,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.services';
 import { MulterModule } from '@nestjs/platform-express';
 import { LeaveBalance, LeaveSchema } from 'src/schemas/leave.schema';
+import { HolidaySchema, LeaveList } from 'src/schemas/listholiday.schema';
 
 
 @Module({
@@ -19,6 +20,10 @@ import { LeaveBalance, LeaveSchema } from 'src/schemas/leave.schema';
                 name:LeaveBalance.name,
                 schema:LeaveSchema,
             },
+            {
+                name: LeaveList.name,
+                schema:HolidaySchema,
+            }
         ]),
         MulterModule.register({
             dest: './uploads',

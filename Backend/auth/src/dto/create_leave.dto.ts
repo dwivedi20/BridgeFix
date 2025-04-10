@@ -19,5 +19,5 @@ import { IsNumber, IsString } from "class-validator";
     SickLeave:number;
     @IsNumber()
     MaternityLeave : number;
-
+   
 }

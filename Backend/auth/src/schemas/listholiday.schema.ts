@@ -1,17 +1,26 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop,  Schema,  SchemaFactory } from "@nestjs/mongoose";
+import { Document,  } from 'mongoose';
 
-
+export enum EventType{
+GOVERMENTHOLIDAYS = 'GovermentalHolidays',
+PERMANENT = 'Permanent',
+RESTRICTED = 'Restricted',
+}
 @Schema({
     timestamps: true ,
 })
-export class Leave extends Document {
- @Prop({required:true ,})
-   year :number;
- @Prop({required:true,})
-   eventname: string;
-@Prop({required:true, type:Date})
-   eventdate: Date;
-@Prop({required:true, enum:['Public', 'Company' ,'Optional']})
-    eventType: string
+
+export class LeaveList extends Document {
+@Prop({required:true , })
+   Year :number;
+@Prop({required:true,})
+   eventName: string;
+@Prop({required:true,})
+   eventDate: Date;
+@Prop({required:true, })
+    eventType: EventType;
+ @Prop({  default: false })
+   deletedAt?:  Boolean ;
 }
-export const Holiday = SchemaFactory.createForClass(Leave);
+
+export const HolidaySchema = SchemaFactory.createForClass(LeaveList);

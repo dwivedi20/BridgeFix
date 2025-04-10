@@ -23,6 +23,9 @@ import { Document } from "mongoose"
     SickLeave:number;
     @Prop({required:true})
     MaternityLeave : number;
+    // Add soft delete field
+     @Prop({  default: false })
+     deletedAt?:  Boolean ;
 
 }
 export const LeaveSchema = SchemaFactory.createForClass(LeaveBalance)

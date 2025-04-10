@@ -1,18 +1,21 @@
+import { Type } from "class-transformer";
 import { IsDate, IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
-
- export class holidaylist{
-     @IsNumber()
-     @IsNotEmpty()
-     year : number;
-     @IsEnum(['Public', 'Company' ,'Optional'])
+import { Number } from "mongoose";
+import { EventType } from "src/schemas/listholiday.schema";
+export class holidaylistDTO{
     @IsNotEmpty()
-    eventtype: string;
+    @Type(()=>Number)
+    @IsNumber()
+    Year:number
+    @IsNotEmpty()
+    eventType:EventType
+    @IsNotEmpty()
     @IsString()
+    eventName: string;
     @IsNotEmpty()
-    eventname: string;
+    @Type(()=>Date)
     @IsDate()
-    @IsNotEmpty()
-    eventdate: Date;
+    eventDate: Date;
 
 
  }
