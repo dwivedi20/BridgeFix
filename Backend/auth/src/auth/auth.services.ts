@@ -17,7 +17,8 @@ import{LeaveBalance, LeaveSchema} from './../schemas/leave.schema';
 import * as path from 'path';
 import * as fs from 'fs';
 import { Leave } from 'src/schemas/listholiday.schema';
-import { LeaveDTO } from 'src/dto/leave.dto';
+import { CreateLeaveDTO } from 'src/dto/create_leave.dto';
+import { UpdateLeaveDTO } from 'src/dto/update_leave.dto';
 
 
 @Injectable()
@@ -139,7 +140,7 @@ export class AuthService {
 
   //LeaveBalace Post
 
-  async createLeave( leaveDto:LeaveDTO):Promise<any>{
+  async createLeave( leaveDto:CreateLeaveDTO):Promise<any>{
     const newLeave = new this.LeaveBalance(leaveDto)
     return newLeave.save()
    
@@ -171,6 +172,18 @@ async getLeaveBalance(employee_id:string):Promise<any>{
   
 }
 
+//update leave balance 
+async updateByEmployeeId(employee_id:string, updateleaveDto:UpdateLeaveDTO):Promise<any>{
+  const updateByEmployeeId = await this.LeaveBalance.findOneAndUpdate({employee_id:employee_id},updateleaveDto,{
+    new:true,
+  });
+  if (!updateByEmployeeId) {
+    throw new NotFoundException('error');
+  }
+  return updateByEmployeeId;
+}
+
+
 //updateprofile
 
   async updateProfile(id: string, updateUserDto: UpdateDTO): Promise<any> {
@@ -182,6 +195,8 @@ async getLeaveBalance(employee_id:string):Promise<any>{
     }
     return user;
   }
+
+
   async userforgotpassword(email: string): Promise<any> {
     const forgot = await this.UserModel.findOne({ email: email });
       console.log(forgot, "forgot");

@@ -7,21 +7,21 @@ import { Document } from "mongoose"
  export class LeaveBalance extends Document{
     @Prop({ required: true, unique: true,  }) 
     employee_id:string;
-    @Prop({required:true,default:0})
+    @Prop({required:true})
     LossOfPay: number;
-    @Prop({required:true,default:0})
+    @Prop({required:true})
     Comp_off:number;
-    @Prop({required:true,default:0})
+    @Prop({required:true})
     EmergencyLeave : number;
-    @Prop({required:true,default:0})
+    @Prop({required:true})
     EarnedLeave : number;
-    @Prop({required:true,default:0})
+    @Prop({required:true})
     PaternityLeave:number;
-    @Prop({required:true,default:0})
+    @Prop({required:true})
     RestrictedLeave:number;
-    @Prop({required:true,default:0})
+    @Prop({required:true})
     SickLeave:number;
-    @Prop({required:true,default:0})
+    @Prop({required:true})
     MaternityLeave : number;
 
 }

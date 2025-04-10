@@ -6,7 +6,8 @@ import { AuthGuard } from "src/guards/auth.guard";
 import { UpdateDTO } from "src/dto/update.dto";
 import { ForgotDTO } from "src/dto/forgot.dto";
 import { ResetPasswordDTO } from "src/dto/reset.dto";
-import { LeaveDTO } from "src/dto/leave.dto";
+import { CreateLeaveDTO} from "src/dto/create_leave.dto";
+import { UpdateLeaveDTO } from "src/dto/update_leave.dto";
 
 
 @Controller('/auth')
@@ -58,7 +59,7 @@ export class AuthController {
 // }
 
 @Post("/leave")
-  async createLeave(@Body()leaveDto:LeaveDTO){
+  async createLeave(@Body()leaveDto:CreateLeaveDTO){
     return await this.authServices.createLeave(leaveDto)
   }
 
@@ -71,6 +72,8 @@ export class AuthController {
       };
     } 
 
+
+
 @Patch(':id')
 @UseGuards(AuthGuard)
 async updateProfile(
@@ -80,6 +83,18 @@ async updateProfile(
    // Call the update method from the service
    return this.authServices.updateProfile(id, updateUserDto);
  }
+
+
+
+// Leave Update Api
+ @Patch('/updateleave/:employee_id')
+ async updateByEmployeeId(
+  @Param('employee_id')employee_id:string,
+  @Body()updateleaveDto:UpdateLeaveDTO,
+ ){
+  return this.authServices.updateByEmployeeId(employee_id,updateleaveDto)
+ }
+
 
 @Post("/forgot-password")
 @UseGuards(AuthGuard)

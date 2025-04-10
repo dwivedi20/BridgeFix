@@ -1,6 +1,6 @@
 import { IsNumber, IsString } from "class-validator";
 
- export class LeaveDTO{
+ export class CreateLeaveDTO{
     @IsString()
     employee_id :string;
     @IsNumber()
@@ -9,6 +9,8 @@ import { IsNumber, IsString } from "class-validator";
     Comp_off:number;
     @IsNumber()
     EmergencyLeave:number;
+    @IsNumber()
+    EarnedLeave:number;
     @IsNumber()
     PaternityLeave:number;
     @IsNumber()
